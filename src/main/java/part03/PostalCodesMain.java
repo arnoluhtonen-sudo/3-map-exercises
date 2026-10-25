@@ -2,6 +2,8 @@ package part03;
 
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * This part of the exercise is tested manually through the user interface, not
@@ -36,6 +38,9 @@ public class PostalCodesMain {
          * The keys in the map are postal codes and the values are postal district
          * names.
          */
+
+        // https://stackoverflow.com/questions/571388/how-can-i-sort-the-keys-of-a-map-in-java
+        // https://www.w3schools.com/java/java_treeset.asp
         Map<String, String> postalCodes = PostalCodesReader.readPostalCodes();
 
         Scanner scanner = new Scanner(System.in);
@@ -43,7 +48,17 @@ public class PostalCodesMain {
         String answer = scanner.nextLine(); // answer may be a postal code or a postal district name
 
         // TODO: Implement your logic here
-
+        // postalCodes(k, v) // (codes, names)
+        if (postalCodes.containsKey(answer)) {
+            System.out.println(postalCodes.get(answer));
+        }
+        Set<String> sortedCodes = new TreeSet<>();
+        postalCodes.forEach((k, v) -> {
+            if (v.equalsIgnoreCase(answer)) {
+                sortedCodes.add(k);
+            }
+        });
+        sortedCodes.forEach(System.out::println);
         scanner.close();
     }
 }
